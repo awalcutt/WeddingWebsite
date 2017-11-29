@@ -1,0 +1,9 @@
+[package]
+name = "alexlillianwedding"
+version = "0.1.0"
+authors = ["Alex"]
+
+[dependencies]
+maud = { version = "0.17.2", features = ["rocket"] }
+rocket = "0.3.3"
+rocket_codegen = "0.3.3"
