@@ -8,7 +8,8 @@ phases:
 
   pre_build:
     commands:
-      - echo "PRE_BUILD"
+      - echo "Adding cargo bin directory to PATH"
+      - export PATH=$PATH:$HOME/.cargo/bin
 
   build:
     commands:
@@ -17,7 +18,7 @@ phases:
 
   post_build:
     commands:
-      - echo "POST_BUILD"
+      - echo "Completed Build"
 
 artifacts:
   files:
