@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Installing Rust Nightly Toolchain"
+      - curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain nightly
+
+  pre_build:
+    commands:
+      - echo "PRE_BUILD"
+
+  build:
+    commands:
+      - echo "Building Release Target with Cargo"
+      - cargo build --release
+
+  post_build:
+    commands:
+      - echo "POST_BUILD"
+
+artifacts:
+  files:
+    - /target/release/alexlillianwedding
+  discard-paths: yes
