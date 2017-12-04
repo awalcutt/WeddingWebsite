@@ -1,0 +1,11 @@
+version: 0.0
+
+os: linux
+
+files:
+  - source: alexlillianwedding
+    destination: /usr/local/bin
+
+hooks:
+  ApplicationStart:
+    - location: scripts/launch.sh
