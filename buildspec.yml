@@ -22,5 +22,5 @@ phases:
 
 artifacts:
   files:
-    - /target/release/alexlillianwedding
+    - target/release/alexlillianwedding
   discard-paths: yes
