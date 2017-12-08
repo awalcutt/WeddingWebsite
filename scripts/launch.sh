@@ -1,3 +1,3 @@
 #!/bin/sh
 
-alexlillianwedding
+/usr/local/bin/alexlillianwedding
