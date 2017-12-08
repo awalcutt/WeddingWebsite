@@ -22,7 +22,6 @@ phases:
 
 artifacts:
   files:
-    - scripts
+    - scripts/*
     - appspec.yml
-    - target/release/alexlillianwedding
-  discard-paths: yes
+    - target/release/*

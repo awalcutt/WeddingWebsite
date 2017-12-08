@@ -3,7 +3,7 @@ version: 0.0
 os: linux
 
 files:
-  - source: alexlillianwedding
+  - source: target/release/alexlillianwedding
     destination: /usr/local/bin
 
 hooks:
