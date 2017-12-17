@@ -1,3 +1,3 @@
 #!/bin/sh
 
-ROCKET_ENV=production /usr/local/bin/alexlillianwedding
+ROCKET_ENV=production /usr/local/bin/alexlillianwedding &
