@@ -5,11 +5,13 @@
 extern crate maud;
 extern crate rocket;
 
+use std::path::{Path, PathBuf};
+
 use maud::{html, Markup};
 use rocket::{request, Outcome, Request, Rocket};
 use rocket::http::Status;
 use rocket::request::FromRequest;
-use rocket::response::Redirect;
+use rocket::response::{NamedFile, Redirect};
 
 static HOSTNAME: &'static str = "https://alexlillian.wedding";
 static X_FORWARDED_PROTO: &'static str = "X-Forwarded-Proto";
@@ -41,6 +43,11 @@ fn http_redirect(request: &Request) -> Redirect {
     Redirect::permanent(&redirect_uri)
 }
 
+#[get("/<file..>")]
+fn files(file: PathBuf) -> Option<NamedFile> {
+    NamedFile::open(Path::new("static/").join(file)).ok()
+}
+
 #[get("/")]
 fn index(_https: Https) -> Markup {
     html! {
@@ -63,6 +70,7 @@ fn index(_https: Https) -> Markup {
             div.jumbotron {
                 h1 "The Wedding of Alex and Lillian"
                 p "They are getting married!"
+                img src="image/WeddingComic.png" class="img-responsive" alt="Alex Walcutt and Lillian Adamski Save the Date Seattle Washington September Eighth Twenty Eighteen";
             }
             p "This website is a work in progress..."
         }
@@ -70,7 +78,7 @@ fn index(_https: Https) -> Markup {
 }
 
 fn rocket() -> Rocket {
-    rocket::ignite().mount("/", routes![index]).catch(errors![http_redirect])
+    rocket::ignite().mount("/", routes![index, files]).catch(errors![http_redirect])
 }
 
 fn main() {
