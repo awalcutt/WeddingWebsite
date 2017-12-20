@@ -14,6 +14,7 @@ use rocket::request::FromRequest;
 use rocket::response::{NamedFile, Redirect};
 
 static HOSTNAME: &'static str = "https://alexandlillian.wedding";
+static STATIC_ROOT: &'static str = "/var/www/weddingwebsite/static/";
 static X_FORWARDED_PROTO: &'static str = "X-Forwarded-Proto";
 
 struct Https;
@@ -45,7 +46,7 @@ fn http_redirect(request: &Request) -> Redirect {
 
 #[get("/<file..>")]
 fn files(file: PathBuf) -> Option<NamedFile> {
-    NamedFile::open(Path::new("static/").join(file)).ok()
+    NamedFile::open(Path::new(STATIC_ROOT).join(file)).ok()
 }
 
 #[get("/healthy")]
