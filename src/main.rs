@@ -48,6 +48,11 @@ fn files(file: PathBuf) -> Option<NamedFile> {
     NamedFile::open(Path::new("static/").join(file)).ok()
 }
 
+#[get("/healthy")]
+fn health_check() -> &'static str {
+    "healthy"
+}
+
 #[get("/")]
 fn index(_https: Https) -> Markup {
     html! {
@@ -78,7 +83,7 @@ fn index(_https: Https) -> Markup {
 }
 
 fn rocket() -> Rocket {
-    rocket::ignite().mount("/", routes![index, files]).catch(errors![http_redirect])
+    rocket::ignite().mount("/", routes![index, files, health_check]).catch(errors![http_redirect])
 }
 
 fn main() {
@@ -113,5 +118,12 @@ mod test {
         let client = Client::new(rocket()).expect("valid rocket instance");
         let response = client.get("/").dispatch();
         assert_eq!(response.status(), Status::PermanentRedirect);
+    }
+
+    #[test]
+    fn health_check_always_ok() {
+        let client = Client::new(rocket()).expect("valid rocket instance");
+        let response = client.get("/healthy").dispatch();
+        assert_eq!(response.status(), Status::Ok);
     }
 }
