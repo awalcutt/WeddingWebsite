@@ -13,7 +13,7 @@ use rocket::http::Status;
 use rocket::request::FromRequest;
 use rocket::response::{NamedFile, Redirect};
 
-static HOSTNAME: &'static str = "https://alexlillian.wedding";
+static HOSTNAME: &'static str = "https://alexandlillian.wedding";
 static X_FORWARDED_PROTO: &'static str = "X-Forwarded-Proto";
 
 struct Https;
