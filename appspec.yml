@@ -6,7 +6,7 @@ files:
   - source: target/release/alexlillianwedding
     destination: /usr/local/bin
   - source: static
-    destination: /var/www/weddingwebsite
+    destination: /var/www/weddingwebsite/static
 
 hooks:
   ApplicationStart:
