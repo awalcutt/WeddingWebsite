@@ -65,20 +65,18 @@ fn index(_https: Https) -> Markup {
         title "The Wedding of Alex and Lillian"
 
         nav.navbar.navbar-default div.container-fluid {
-            div.navbar-header a.navbar-brand href="#" "Alex and Lillian Wedding"
-            ul.nav.navbar-nav {
-                li.active a href="#" "Home"
-            }
-            p.navbar-text "Additional Pages TBD"
+            div.navbar-header a.navbar-brand href="#" "Alex + Lillian"
+            p.navbar-text "More Coming Soon!"
         }
 
         div.container {
             div.jumbotron {
-                h1 "The Wedding of Alex and Lillian"
-                p "They are getting married!"
                 img src="image/WeddingComic.png" class="img-responsive" alt="Alex Walcutt and Lillian Adamski Save the Date Seattle Washington September Eighth Twenty Eighteen";
             }
-            p "This website is a work in progress..."
+        }
+
+        div align="center" {
+            p.small "Copyright &copy; 2018 Alex Walcutt"
         }
     }
 }
