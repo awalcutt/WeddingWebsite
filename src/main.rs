@@ -70,9 +70,7 @@ fn index(_https: Https) -> Markup {
         }
 
         div.container {
-            div.jumbotron {
-                img src="image/WeddingComic.png" class="img-responsive" alt="Alex Walcutt and Lillian Adamski Save the Date Seattle Washington September Eighth Twenty Eighteen";
-            }
+            img src="image/WeddingComic.png" class="img-responsive" alt="Alex Walcutt and Lillian Adamski Save the Date Seattle Washington September Eighth Twenty Eighteen";
         }
 
         div align="center" {
