@@ -76,7 +76,11 @@ fn index(_https: Https) -> Markup {
         }
 
         div align="center" {
-            p.small "Copyright &copy; 2018 Alex Walcutt"
+            p.small {
+                "Copyright © 2018 Alex Walcutt | "
+                "Powered by Amazon Web Services | "
+                a href="https://github.com/awalcutt/WeddingWebsite" "Source Code on GitHub"
+            }
         }
     }
 }
