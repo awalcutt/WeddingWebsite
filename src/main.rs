@@ -69,11 +69,11 @@ fn index(_https: Https) -> Markup {
             p.navbar-text "More Content Coming Soon!"
         }
 
-        div.container {
+        div.container align="center" {
             img src="image/WeddingComic.png" class="img-responsive" alt="Alex Walcutt and Lillian Adamski Save the Date Seattle Washington September Eighth Twenty Eighteen";
         }
 
-        div.container {
+        div.container align="center" {
             p.small {
                 "Copyright © 2018 Alex Walcutt | "
                 "Powered by Amazon Web Services | "
