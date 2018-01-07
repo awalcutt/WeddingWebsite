@@ -66,14 +66,14 @@ fn index(_https: Https) -> Markup {
 
         nav.navbar.navbar-default div.container-fluid {
             div.navbar-header a.navbar-brand href="#" "Alex + Lillian"
-            p.navbar-text "More Coming Soon!"
+            p.navbar-text "More Content Coming Soon!"
         }
 
         div.container {
             img src="image/WeddingComic.png" class="img-responsive" alt="Alex Walcutt and Lillian Adamski Save the Date Seattle Washington September Eighth Twenty Eighteen";
         }
 
-        div align="center" {
+        div.container {
             p.small {
                 "Copyright © 2018 Alex Walcutt | "
                 "Powered by Amazon Web Services | "
