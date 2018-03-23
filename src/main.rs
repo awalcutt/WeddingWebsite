@@ -83,49 +83,8 @@ fn index(_https: Https) -> Markup {
     }
 }
 
-#[get("/secret")]
-fn secret(_https: Https) -> Markup {
-    html! {
-        link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css";
-        meta name="viewport" content="width=device-width, initial-scale=1";
-        script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js" ""
-        script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ""
-
-        title "The Wedding of Alex and Lillian"
-
-        nav.navbar.navbar-default div.container-fluid {
-            div.navbar-header a.navbar-brand href="#" "Alex + Lillian"
-            p.navbar-text "More Content Coming Soon!"
-        }
-
-        div.container {
-            form action="tbd" {
-                div.form-group {
-                    label for="email" "Email:"
-                    input.form-control type="email" id="email" placeholder="Enter email" name="email";
-                }
-
-                div.form-group {
-                    label for="pwd" "Password:"
-                    input.form-control type="password" id="pwd" placeholder="Enter password" name="pwd";
-                }
-
-                button.btn.btn-default type="submit" "Login"
-            }
-        }
-
-        div.container align="center" {
-            p.small {
-                "Copyright © 2018 Alex Walcutt | "
-                "Powered by Amazon Web Services | "
-                a href="https://github.com/awalcutt/WeddingWebsite" "Source Code on GitHub"
-            }
-        }
-    }
-}
-
 fn rocket() -> Rocket {
-    rocket::ignite().mount("/", routes![index, files, health_check, secret]).catch(errors![http_redirect])
+    rocket::ignite().mount("/", routes![index, files, health_check]).catch(errors![http_redirect])
 }
 
 fn main() {
