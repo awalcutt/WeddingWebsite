@@ -2,7 +2,7 @@
 name = "alexlillianwedding"
 version = "0.1.0"
 dependencies = [
- "maud 0.17.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "maud 0.17.2 (git+https://github.com/anxiousmodernman/maud.git?branch=121_proc_macro)",
  "rocket 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)",
  "rocket_codegen 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
@@ -202,25 +202,25 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 [[package]]
 name = "maud"
 version = "0.17.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
+source = "git+https://github.com/anxiousmodernman/maud.git?branch=121_proc_macro#0f453a5568305496b963c3825e97a356291fd449"
 dependencies = [
- "maud_htmlescape 0.17.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "maud_macros 0.17.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "maud_htmlescape 0.17.0 (git+https://github.com/anxiousmodernman/maud.git?branch=121_proc_macro)",
+ "maud_macros 0.17.2 (git+https://github.com/anxiousmodernman/maud.git?branch=121_proc_macro)",
  "rocket 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "maud_htmlescape"
 version = "0.17.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
+source = "git+https://github.com/anxiousmodernman/maud.git?branch=121_proc_macro#0f453a5568305496b963c3825e97a356291fd449"
 
 [[package]]
 name = "maud_macros"
 version = "0.17.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
+source = "git+https://github.com/anxiousmodernman/maud.git?branch=121_proc_macro#0f453a5568305496b963c3825e97a356291fd449"
 dependencies = [
  "literalext 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "maud_htmlescape 0.17.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "maud_htmlescape 0.17.0 (git+https://github.com/anxiousmodernman/maud.git?branch=121_proc_macro)",
 ]
 
 [[package]]
@@ -517,9 +517,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 "checksum log 0.3.9 (registry+https://github.com/rust-lang/crates.io-index)" = "e19e8d5c34a3e0e2223db8e060f9e8264aeeb5c5fc64a4ee9965c062211c024b"
 "checksum log 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)" = "89f010e843f2b1a31dbd316b3b8d443758bc634bed37aabade59c686d644e0a2"
 "checksum matches 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)" = "100aabe6b8ff4e4a7e32c1c13523379802df0772b82466207ac25b013f193376"
-"checksum maud 0.17.2 (registry+https://github.com/rust-lang/crates.io-index)" = "c0023c814f4a545946ab612ad64a4edce8126d4fe4f0abc5f319b80877112048"
-"checksum maud_htmlescape 0.17.0 (registry+https://github.com/rust-lang/crates.io-index)" = "d0fb85bccffc42302ad1e1ed8679f6a39d1317f775a37fbc3f79bdfbe054bfb7"
-"checksum maud_macros 0.17.2 (registry+https://github.com/rust-lang/crates.io-index)" = "0d8377d77c1995044b8ad67a59d15b434c8b7de470ac743de4916ee2bd9fce55"
+"checksum maud 0.17.2 (git+https://github.com/anxiousmodernman/maud.git?branch=121_proc_macro)" = "<none>"
+"checksum maud_htmlescape 0.17.0 (git+https://github.com/anxiousmodernman/maud.git?branch=121_proc_macro)" = "<none>"
+"checksum maud_macros 0.17.2 (git+https://github.com/anxiousmodernman/maud.git?branch=121_proc_macro)" = "<none>"
 "checksum memchr 1.0.2 (registry+https://github.com/rust-lang/crates.io-index)" = "148fab2e51b4f1cfc66da2a7c32981d1d3c083a803978268bb11fe4b86925e7a"
 "checksum memoffset 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)" = "0f9dc261e2b62d7a622bf416ea3c5245cdd5d9a7fcc428c0d06804dfce1775b3"
 "checksum mime 0.2.6 (registry+https://github.com/rust-lang/crates.io-index)" = "ba626b8a6de5da682e1caa06bdb42a335aee5a84db8e5046a3e8ab17ba0a3ae0"
