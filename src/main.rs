@@ -1,5 +1,6 @@
 #![feature(plugin)]
 #![feature(proc_macro)]
+#![feature(proc_macro_non_items)]
 #![plugin(rocket_codegen)]
 
 extern crate maud;
@@ -8,10 +9,13 @@ extern crate rocket;
 use std::path::{Path, PathBuf};
 
 use maud::{html, Markup};
-use rocket::{request, Outcome, Request, Rocket};
 use rocket::http::Status;
 use rocket::request::FromRequest;
 use rocket::response::{NamedFile, Redirect};
+use rocket::Request;
+use rocket::request;
+use rocket::Outcome;
+use rocket::Rocket;
 
 static HOSTNAME: &'static str = "https://alexandlillian.wedding";
 static STATIC_ROOT: &'static str = "/var/www/weddingwebsite/static/";
@@ -101,10 +105,12 @@ fn lodging(_https: Https) -> Markup {
         }
 
         div.container align="center" {
-            p {
-                "The ceremony will be held at Ella Bailey Park located in the Magnolia neighborhood northwest of downtown. "
-                "The reception will be held at the Pacific Tower Panoramic Room located in the Beacon Hill neighborhood south of downtown. "
-                "Our recommendation is to take advantage of AirBnB and other homeshare platforms to find a place to stay near the ceremony or reception."
+            div.jumbotron {
+                p {
+                    "The ceremony will be held at Ella Bailey Park located in the Magnolia neighborhood northwest of downtown. "
+                    "The reception will be held at the Pacific Tower Panoramic Room located in the Beacon Hill neighborhood south of downtown. "
+                    "Our recommendation is to take advantage of AirBnB and other homeshare platforms to find a place to stay near the ceremony or reception."
+                }
             }
         }
 
