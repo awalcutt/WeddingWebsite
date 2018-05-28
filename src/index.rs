@@ -13,8 +13,11 @@ fn render(_https: Https) -> Markup {
 
         nav.navbar.navbar-default div.container-fluid {
             div.navbar-header a.navbar-brand href="#" "Alex + Lillian"
-            div.navvar-header a.navvar-brand href="/savethedate" "Save the Date"
-            div.navbar-header a.navbar-brand href="/lodging" "Lodging"
+            ul.nav.navbar-nav {
+                li.active a href="/" "Home"
+                li a href="/savethedate" "Save the Date"
+                li a href="/lodging" "Lodging"
+            }
             p.navbar-text "More Content Coming Soon!"
         }
 
