@@ -6,8 +6,12 @@
 extern crate maud;
 extern crate rocket;
 
+#[macro_use]
+extern crate lazy_static;
+
 use std::path::{Path, PathBuf};
 
+use maud::{html, Markup};
 use rocket::http::Status;
 use rocket::request::FromRequest;
 use rocket::response::{NamedFile, Redirect};
@@ -23,6 +27,29 @@ mod lodging;
 static HOSTNAME: &'static str = "https://alexandlillian.wedding";
 static STATIC_ROOT: &'static str = "/var/www/weddingwebsite/static/";
 static X_FORWARDED_PROTO: &'static str = "X-Forwarded-Proto";
+
+lazy_static! {
+    static ref BOOTSTRAP_INCLUDES: Markup = html! {
+        link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css";
+        meta name="viewport" content="width=device-width, initial-scale=1";
+        script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js" ""
+        script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ""
+    };
+
+    static ref TITLE: Markup = html! {
+        title "The Wedding of Alex and Lillian"
+    };
+
+    static ref FOOTER: Markup = html! {
+        div.container align="center" {
+            p.small {
+                "Copyright © 2018 Alex Walcutt | "
+                "Powered by Amazon Web Services | "
+                a href="https://github.com/awalcutt/WeddingWebsite" "Source Code on GitHub"
+            }
+        }
+    };
+}
 
 struct Https;
 

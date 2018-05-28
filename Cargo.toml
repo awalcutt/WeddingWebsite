@@ -4,7 +4,7 @@ version = "0.1.0"
 authors = ["Alex"]
 
 [dependencies]
-#maud = { git = "https://github.com/anxiousmodernman/maud.git", branch = "121_proc_macro", features = ["rocket"] }
+lazy_static = "1.0"
 maud = { version = "0.17", features = ["rocket"] }
 rocket = "0.3"
 rocket_codegen = "0.3"
