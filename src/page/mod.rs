@@ -3,10 +3,12 @@ use maud::{html, Markup};
 mod home;
 mod savethedate;
 mod lodging;
+mod childcare;
 
 pub use self::home::HomePage;
 pub use self::savethedate::SaveTheDatePage;
 pub use self::lodging::LodgingPage;
+pub use self::childcare::ChildcarePage;
 
 lazy_static! {
     static ref BOOTSTRAP_INCLUDES: Markup = html! {
@@ -31,10 +33,11 @@ lazy_static! {
     };
 }
 
-const PAGES: [PageVariant; 3] = [
+const PAGES: [PageVariant; 4] = [
     PageVariant::Home,
     PageVariant::SaveTheDate,
     PageVariant::Lodging,
+    PageVariant::Childcare,
 ];
 
 #[derive(PartialEq, Eq)]
@@ -42,6 +45,7 @@ pub enum PageVariant {
     Home,
     SaveTheDate,
     Lodging,
+    Childcare,
 }
 
 impl PageVariant {
@@ -50,6 +54,7 @@ impl PageVariant {
             &PageVariant::Home => "/",
             &PageVariant::SaveTheDate => "/savethedate",
             &PageVariant::Lodging => "/lodging",
+            &PageVariant::Childcare => "/childcare",
         }
     }
 
@@ -58,6 +63,7 @@ impl PageVariant {
             &PageVariant::Home => "Home",
             &PageVariant::SaveTheDate => "Save the Date",
             &PageVariant::Lodging => "Lodging",
+            &PageVariant::Childcare => "Childcare",
         }
     }
 }
