@@ -1,26 +1,13 @@
 use maud::{html, Markup};
-use Https;
+use page::{PageVariant, WeddingWebsitePage};
 
-use ::{BOOTSTRAP_INCLUDES, TITLE, FOOTER};
+pub struct LodgingPage;
 
-#[get("/lodging")]
-fn render(_https: Https) -> Markup {
-    html! {
-        (BOOTSTRAP_INCLUDES)
+impl WeddingWebsitePage for LodgingPage {
+    const VARIANT: PageVariant = PageVariant::Lodging;
 
-        (TITLE)
-
-        nav.navbar.navbar-default div.container-fluid {
-            div.navbar-header a.navbar-brand href="#" "Alex + Lillian"
-            ul.nav.navbar-nav {
-                li a href="/" "Home"
-                li a href="/savethedate" "Save the Date"
-                li.active a href="/lodging" "Lodging"
-            }
-            p.navbar-text "More Content Coming Soon!"
-        }
-
-        div.container align="center" {
+    fn content() -> Markup {
+        html! {
             div.jumbotron {
                 p "Our recommendation is to take advantage of AirBnB and other homeshare platforms to find a place to stay near the ceremony or reception."
                 p "The ceremony will be held at Ella Bailey Park located in the Magnolia neighborhood northwest of downtown."
@@ -31,7 +18,5 @@ fn render(_https: Https) -> Markup {
                 }
             }
         }
-
-        (FOOTER)
     }
 }

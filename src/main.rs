@@ -9,73 +9,33 @@ extern crate rocket;
 #[macro_use]
 extern crate lazy_static;
 
+mod page;
+mod security;
+
 use std::path::{Path, PathBuf};
 
-use maud::{html, Markup};
-use rocket::http::Status;
-use rocket::request::FromRequest;
-use rocket::response::{NamedFile, Redirect};
-use rocket::Request;
-use rocket::request;
-use rocket::Outcome;
-use rocket::Rocket;
+use maud::Markup;
+use rocket::{Request, Rocket, response::NamedFile, response::Redirect};
 
-mod index;
-mod savethedate;
-mod lodging;
+use security::Https;
+use page::{WeddingWebsitePage, HomePage, SaveTheDatePage, LodgingPage};
 
 static HOSTNAME: &'static str = "https://alexandlillian.wedding";
 static STATIC_ROOT: &'static str = "/var/www/weddingwebsite/static/";
-static X_FORWARDED_PROTO: &'static str = "X-Forwarded-Proto";
 
-lazy_static! {
-    static ref BOOTSTRAP_INCLUDES: Markup = html! {
-        link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css";
-        meta name="viewport" content="width=device-width, initial-scale=1";
-        script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js" ""
-        script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ""
-    };
-
-    static ref TITLE: Markup = html! {
-        title "The Wedding of Alex and Lillian"
-    };
-
-    static ref FOOTER: Markup = html! {
-        div.container align="center" {
-            p.small {
-                "Copyright © 2018 Alex Walcutt | "
-                "Powered by Amazon Web Services | "
-                a href="https://github.com/awalcutt/WeddingWebsite" "Source Code on GitHub"
-            }
-        }
-    };
+#[get("/")]
+fn render_home_page(_https: Https) -> Markup {
+    HomePage::render()
 }
 
-struct Https;
-
-impl<'a, 'r> FromRequest<'a, 'r> for Https {
-    type Error = ();
-
-    fn from_request(request: &'a Request<'r>) -> request::Outcome<Self, Self::Error> {
-        let client_protocol_headers: Vec<&str> = request.headers().get(X_FORWARDED_PROTO).collect();
-
-        if client_protocol_headers.len() != 1 {
-            return Outcome::Failure((Status::UpgradeRequired, ()))
-        }
-
-        let client_protocol = client_protocol_headers[0];
-
-        match client_protocol {
-            "https" => Outcome::Success(Https),
-            _ => Outcome::Failure((Status::UpgradeRequired, ()))
-        }
-    }
+#[get("/savethedate")]
+fn render_save_the_date_page(_https: Https) -> Markup {
+    SaveTheDatePage::render()
 }
 
-#[error(426)]
-fn http_redirect(request: &Request) -> Redirect {
-    let redirect_uri = HOSTNAME.to_owned() + request.uri().path();
-    Redirect::permanent(&redirect_uri)
+#[get("/lodging")]
+fn render_lodging_page(_https: Https) -> Markup {
+    LodgingPage::render()
 }
 
 #[get("/<file..>")]
@@ -88,11 +48,17 @@ fn health_check() -> &'static str {
     "healthy"
 }
 
+#[error(426)]
+fn http_redirect(request: &Request) -> Redirect {
+    let redirect_uri = HOSTNAME.to_owned() + request.uri().path();
+    Redirect::permanent(&redirect_uri)
+}
+
 fn rocket() -> Rocket {
     rocket::ignite().mount("/", routes![
-        index::render,
-        savethedate::render,
-        lodging::render,
+        render_home_page,
+        render_save_the_date_page,
+        render_lodging_page,
         files,
         health_check
     ]).catch(errors![http_redirect])
@@ -109,7 +75,7 @@ mod test {
     use rocket::http::Header;
     use rocket::http::Status;
 
-    use super::X_FORWARDED_PROTO;
+    static X_FORWARDED_PROTO: &'static str = "X-Forwarded-Proto";
 
     #[test]
     fn index_https_ok() {
