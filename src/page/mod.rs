@@ -33,11 +33,12 @@ lazy_static! {
     };
 }
 
-const PAGES: [PageVariant; 4] = [
+const PAGES: [PageVariant; 5] = [
     PageVariant::Home,
     PageVariant::SaveTheDate,
     PageVariant::Lodging,
     PageVariant::Childcare,
+    PageVariant::Registry,
 ];
 
 #[derive(PartialEq, Eq)]
@@ -46,6 +47,7 @@ pub enum PageVariant {
     SaveTheDate,
     Lodging,
     Childcare,
+    Registry,
 }
 
 impl PageVariant {
@@ -55,6 +57,7 @@ impl PageVariant {
             &PageVariant::SaveTheDate => "/savethedate",
             &PageVariant::Lodging => "/lodging",
             &PageVariant::Childcare => "/childcare",
+            &PageVariant::Registry => "https://registry.theknot.com/lillian-adamski-thorpe-alex-walcutt-september-2018-wa/25218632",
         }
     }
 
@@ -64,6 +67,14 @@ impl PageVariant {
             &PageVariant::SaveTheDate => "Save the Date",
             &PageVariant::Lodging => "Lodging",
             &PageVariant::Childcare => "Childcare",
+            &PageVariant::Registry => "Registry",
+        }
+    }
+
+    fn target(&self) -> &'static str {
+        match self {
+            &PageVariant::Registry => "_blank", // Open page in new tab/window
+            _ => "_self", // Open page in current window
         }
     }
 }
@@ -82,7 +93,7 @@ pub trait WeddingWebsitePage {
                         @if page == &Self::VARIANT {
                             li.active a href=(page.path()) (page.title())
                         } @else {
-                            li a href=(page.path()) (page.title())
+                            li a href=(page.path()) target=(page.target()) (page.title())
                         }
                     }
                 }
