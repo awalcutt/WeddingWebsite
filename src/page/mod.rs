@@ -14,12 +14,12 @@ lazy_static! {
     static ref BOOTSTRAP_INCLUDES: Markup = html! {
         link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css";
         meta name="viewport" content="width=device-width, initial-scale=1";
-        script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js" ""
-        script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ""
+        script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js" { "" }
+        script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" { "" }
     };
 
     static ref TITLE: Markup = html! {
-        title "The Wedding of Alex and Lillian"
+        title { "The Wedding of Alex and Lillian" }
     };
 
     static ref FOOTER: Markup = html! {
@@ -27,7 +27,7 @@ lazy_static! {
             p.small {
                 "Copyright © 2018 Alex Walcutt | "
                 "Powered by Amazon Web Services | "
-                a href="https://github.com/awalcutt/WeddingWebsite" "Source Code on GitHub"
+                a href="https://github.com/awalcutt/WeddingWebsite" { "Source Code on GitHub" }
             }
         }
     };
@@ -86,18 +86,26 @@ pub trait WeddingWebsitePage {
 
     fn navbar() -> Markup {
         html! {
-            nav.navbar.navbar-default div.container-fluid {
-                div.navbar-header a.navbar-brand href="#" "Alex + Lillian"
-                ul.nav.navbar-nav {
-                    @for page in PAGES.iter() {
-                        @if page == &Self::VARIANT {
-                            li.active a href=(page.path()) (page.title())
-                        } @else {
-                            li a href=(page.path()) target=(page.target()) (page.title())
+            nav.navbar.navbar-default {
+                div.container-fluid {
+                    div.navbar-header {
+                        a.navbar-brand href="#" { "Alex + Lillian" }
+                    }
+                    ul.nav.navbar-nav {
+                        @for page in PAGES.iter() {
+                            @if page == &Self::VARIANT {
+                                li.active {
+                                    a href=(page.path()) { (page.title()) }
+                                }
+                            } @else {
+                                li {
+                                    a href=(page.path()) target=(page.target()) { (page.title()) }
+                                }
+                            }
                         }
                     }
+                    p.navbar-text { "More Content Coming Soon!" }
                 }
-                p.navbar-text "More Content Coming Soon!"
             }
         }
     }
