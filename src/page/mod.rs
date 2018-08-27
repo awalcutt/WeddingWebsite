@@ -2,12 +2,12 @@ use maud::{html, Markup};
 
 mod home;
 mod savethedate;
-mod lodging;
+mod locations;
 mod childcare;
 
 pub use self::home::HomePage;
 pub use self::savethedate::SaveTheDatePage;
-pub use self::lodging::LodgingPage;
+pub use self::locations::LocationsPage;
 pub use self::childcare::ChildcarePage;
 
 lazy_static! {
@@ -36,7 +36,7 @@ lazy_static! {
 const PAGES: [PageVariant; 5] = [
     PageVariant::Home,
     PageVariant::SaveTheDate,
-    PageVariant::Lodging,
+    PageVariant::Locations,
     PageVariant::Childcare,
     PageVariant::Registry,
 ];
@@ -45,7 +45,7 @@ const PAGES: [PageVariant; 5] = [
 pub enum PageVariant {
     Home,
     SaveTheDate,
-    Lodging,
+    Locations,
     Childcare,
     Registry,
 }
@@ -55,7 +55,7 @@ impl PageVariant {
         match self {
             &PageVariant::Home => "/",
             &PageVariant::SaveTheDate => "/savethedate",
-            &PageVariant::Lodging => "/lodging",
+            &PageVariant::Locations => "/locations",
             &PageVariant::Childcare => "/childcare",
             &PageVariant::Registry => "https://registry.theknot.com/lillian-adamski-thorpe-alex-walcutt-september-2018-wa/25218632",
         }
@@ -65,7 +65,7 @@ impl PageVariant {
         match self {
             &PageVariant::Home => "Home",
             &PageVariant::SaveTheDate => "Save the Date",
-            &PageVariant::Lodging => "Lodging",
+            &PageVariant::Locations => "Locations",
             &PageVariant::Childcare => "Childcare",
             &PageVariant::Registry => "Registry",
         }
