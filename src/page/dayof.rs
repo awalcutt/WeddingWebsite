@@ -1,10 +1,10 @@
 use maud::{html, Markup};
 use page::{PageVariant, WeddingWebsitePage};
 
-pub struct LocationsPage;
+pub struct DayOfPage;
 
-impl WeddingWebsitePage for LocationsPage {
-    const VARIANT: PageVariant = PageVariant::Locations;
+impl WeddingWebsitePage for DayOfPage {
+    const VARIANT: PageVariant = PageVariant::DayOf;
 
     fn content() -> Markup {
         html! {
@@ -20,9 +20,6 @@ impl WeddingWebsitePage for LocationsPage {
                 p { "There will be a variety of food and drink to enjoy. Beer, wine, and non-alcoholic beverages will be free to our guests! Basic mixed drinks will be available for a charge (no cash)." }
                 h4 { "Parking" }
                 p { "There is free parking on the street. For those that are interested, we also have access to a parking garage. Parking in the garage is $6 for the entire evening and you must use a card (no cash)." }
-
-                h3 { "Lodging" }
-                p { "Our recommendation is to take advantage of AirBnB and other homeshare platforms to find a place to stay near the ceremony or reception." }
 
                 div class="embed-responsive embed-responsive-4by3" {
                     iframe class="embed-responsive-item" src="https://www.google.com/maps/d/embed?mid=1mdrl32nTHx5U7RebHPm72B_Y0FJQQsqr&hl=en" { "" }
