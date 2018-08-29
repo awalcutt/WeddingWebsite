@@ -15,7 +15,7 @@ use std::path::{Path, PathBuf};
 use maud::Markup;
 use rocket::{Rocket, response::NamedFile};
 
-use page::{WeddingWebsitePage, HomePage, SaveTheDatePage, LocationsPage, ChildcarePage};
+use page::{WeddingWebsitePage, HomePage, SaveTheDatePage, DayOfPage, ChildcarePage};
 
 static STATIC_ROOT: &'static str = "/var/www/weddingwebsite/static/";
 
@@ -29,9 +29,9 @@ fn render_save_the_date_page() -> Markup {
     SaveTheDatePage::render()
 }
 
-#[get("/locations")]
-fn render_lodging_page() -> Markup {
-    LocationsPage::render()
+#[get("/dayof")]
+fn render_day_of_page() -> Markup {
+    DayOfPage::render()
 }
 
 #[get("/childcare")]
@@ -53,7 +53,7 @@ fn rocket() -> Rocket {
     rocket::ignite().mount("/", routes![
         render_home_page,
         render_save_the_date_page,
-        render_lodging_page,
+        render_day_of_page,
         render_childcare_page,
         files,
         health_check
