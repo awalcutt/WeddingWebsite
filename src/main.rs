@@ -1,56 +1,52 @@
-#![feature(plugin)]
-#![feature(proc_macro_non_items)]
-#![plugin(rocket_codegen)]
+#![feature(proc_macro_hygiene)]
 
-extern crate maud;
-extern crate rocket;
-
-#[macro_use]
-extern crate lazy_static;
+use rocket::fs::NamedFile;
+use rocket::response::content::RawHtml;
+use maud::Markup;
+use lazy_static::lazy_static;
 
 mod page;
 
 use std::path::{Path, PathBuf};
 
-use maud::Markup;
-use rocket::{Rocket, response::NamedFile};
+use rocket::Route;
 
 use page::{WeddingWebsitePage, HomePage, SaveTheDatePage, DayOfPage, ChildcarePage};
 
 static STATIC_ROOT: &'static str = "/var/www/weddingwebsite/static/";
 
-#[get("/")]
-fn render_home_page() -> Markup {
-    HomePage::render()
+#[rocket::get("/")]
+fn render_home_page() -> RawHtml<Markup> {
+    RawHtml(HomePage::render())
 }
 
-#[get("/savethedate")]
-fn render_save_the_date_page() -> Markup {
-    SaveTheDatePage::render()
+#[rocket::get("/savethedate")]
+fn render_save_the_date_page() -> RawHtml<Markup> {
+    RawHtml(SaveTheDatePage::render())
 }
 
-#[get("/dayof")]
-fn render_day_of_page() -> Markup {
-    DayOfPage::render()
+#[rocket::get("/dayof")]
+fn render_day_of_page() -> RawHtml<Markup> {
+    RawHtml(DayOfPage::render())
 }
 
-#[get("/childcare")]
-fn render_childcare_page() -> Markup {
-    ChildcarePage::render()
+#[rocket::get("/childcare")]
+fn render_childcare_page() -> RawHtml<Markup> {
+    RawHtml(ChildcarePage::render())
 }
 
-#[get("/<file..>")]
-fn files(file: PathBuf) -> Option<NamedFile> {
-    NamedFile::open(Path::new(STATIC_ROOT).join(file)).ok()
+#[rocket::get("/<file..>")]
+async fn files(file: PathBuf) -> Option<NamedFile> {
+    NamedFile::open(Path::new(STATIC_ROOT).join(file)).await.ok()
 }
 
-#[get("/healthy")]
+#[rocket::get("/healthy")]
 fn health_check() -> &'static str {
     "healthy"
 }
 
-fn rocket() -> Rocket {
-    rocket::ignite().mount("/", routes![
+fn rocket() -> rocket::Rocket<rocket::Build> {
+    rocket::build().mount("/", routes![
         render_home_page,
         render_save_the_date_page,
         render_day_of_page,
@@ -60,20 +56,21 @@ fn rocket() -> Rocket {
     ])
 }
 
-fn main() {
-    rocket().launch();
+#[rocket::main]
+async fn main() -> Result<(), rocket::Error> {
+    rocket().launch().await
 }
 
 #[cfg(test)]
 mod test {
     use super::rocket;
-    use rocket::local::Client;
+    use rocket::local::asynchronous::Client;
     use rocket::http::Status;
 
-    #[test]
-    fn health_check_always_ok() {
-        let client = Client::new(rocket()).expect("valid rocket instance");
-        let response = client.get("/healthy").dispatch();
+    #[rocket::async_test]
+    async fn health_check_always_ok() {
+        let client = Client::tracked(rocket()).await.expect("valid rocket instance");
+        let response = client.get("/healthy").dispatch().await;
         assert_eq!(response.status(), Status::Ok);
     }
 }
