@@ -2,6 +2,7 @@
 name = "alexlillianwedding"
 version = "0.1.0"
 authors = ["Alex"]
+edition = "2024"
 
 [dependencies]
 lazy_static = "1.5"

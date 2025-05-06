@@ -1,17 +1,16 @@
-#![feature(proc_macro_hygiene)]
+// Remove the feature flag as it's not needed in Rust 2021
+// #![feature(proc_macro_hygiene)]
 
 use rocket::fs::NamedFile;
 use rocket::response::content::RawHtml;
+use rocket::routes;
 use maud::Markup;
-use lazy_static::lazy_static;
 
 mod page;
 
 use std::path::{Path, PathBuf};
 
-use rocket::Route;
-
-use page::{WeddingWebsitePage, HomePage, SaveTheDatePage, DayOfPage, ChildcarePage};
+use crate::page::{WeddingWebsitePage, HomePage, SaveTheDatePage, DayOfPage, ChildcarePage};
 
 static STATIC_ROOT: &'static str = "/var/www/weddingwebsite/static/";
 
@@ -58,7 +57,8 @@ fn rocket() -> rocket::Rocket<rocket::Build> {
 
 #[rocket::main]
 async fn main() -> Result<(), rocket::Error> {
-    rocket().launch().await
+    let _ = rocket().launch().await?;
+    Ok(())
 }
 
 #[cfg(test)]

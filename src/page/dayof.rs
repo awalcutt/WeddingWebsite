@@ -1,5 +1,5 @@
 use maud::{html, Markup};
-use page::{PageVariant, WeddingWebsitePage};
+use crate::page::{PageVariant, WeddingWebsitePage};
 
 pub struct DayOfPage;
 
